@@ -1,50 +1,32 @@
 <script lang="ts">
-  import Equation from "./Equation.svelte";
+  import "./app.css";
+  import { Router, Link, Route } from "svelte-routing";
+  import BinomialFormula from "./pages/BinomialFormula.svelte";
+  // import ComplexNumbers from "./pages/ComplexNumbers.svelte";
 
-  let n = 2;
-  $: equation = binomialEquation(n);
-  $: {
-    if (n < 0) {
-      alert('O expoente deve ser maior ou igual a zero 0');
-      n = 0;
-    }
-  }
-
-  function binomialEquation(n: number) {
-    const terms = []
-    for(let k = 0; k <= n; k++) {
-      const coefficient = binomialCoefficient(n, k);
-      const factorX = n-k > 0 ? `x^{${n-k !== 1 ? n - k : ''}}` : ''
-      const factorY = k > 0 ? `y^{${k !== 1 ? k : ''}}` : ''
-      const term = `${coefficient}${factorX}${factorY}`
-      terms.push(term)
-    }
-  
-    return `$$ (x+y)^{${n}} = ${terms.join(' + ')} $$`;
-  }
-
-  function binomialCoefficient(n: number, k: number) {
-    return factorial(n) / (factorial(k) * factorial(n-k))
-  }
-
-  function factorial(n: number) {
-    let f = 1;
-
-    for (let i = 1; i <= n; i++)
-      f *= i;
-
-    return f
-  }
-
+  export let url = ""
 </script>
 
-<main>
-  <form>
-    <label for="exponent">Expoente: </label>
-    <input type="number" name="exponent" id="exponent" bind:value={n}/>
-  </form>
-  <Equation {equation}/>  
-</main>
+<Router { url }>
+  <nav>
+    <Link to="/binomial-formula">Fórmula Binomial</Link>
+    <!-- <Link to="/complex-numbers">Números Complexos</Link> -->
+  </nav>
+  <main>
+    <Route path="/binomial-formula" component={ BinomialFormula } />
+    <!-- <Route path="/complex-numbers" component={ ComplexNumbers } /> -->
+  </main>
+</Router>
 
 <style>
+  nav {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  main {
+    margin-top: 4rem;
+    text-align: center;
+  }
 </style>
