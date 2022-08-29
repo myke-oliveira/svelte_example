@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "start": "vite preview",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -17,10 +17,10 @@
     "svelte-check": "^2.8.0",
     "svelte-preprocess": "^4.10.7",
     "tslib": "^2.4.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.0.9"
+    "typescript": "^4.6.4"
   },
   "dependencies": {
-    "svelte-routing": "^1.6.0"
+    "svelte-routing": "^1.6.0",
+    "vite": "^3.0.9"
   }
 }
