@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { toasts, ToastContainer, FlatToast } from "svelte-toasts";
   import Equation from "./Equation.svelte";
 
   let n = 2;
   $: equation = binomialEquation(n);
   $: {
     if (n < 0) {
-      alert('O expoente deve ser maior ou igual a zero 0.');
+      toasts.error("O expoente deve ser maior ou igual a zero 0.");
       n = 0;
     }
   }
@@ -39,6 +40,9 @@
 </script>
 
 <main>
+  <ToastContainer placement="top-right" let:data={data}>
+    <FlatToast {data} /> <!-- Provider template for your toasts -->
+  </ToastContainer>
   <h1>Expoente: </h1>
   <form>
     <input type="number" name="exponent" id="exponent" bind:value={n}/>
